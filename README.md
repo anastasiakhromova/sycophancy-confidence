@@ -1,1 +1,271 @@
-# sycophancy-confidence
+# Technical package
+
+The author approved 241 existing AI semantic judgments; this was not de novo independent annotation.
+Author-reported procedure: The second reviewer independently assessed 241 responses before seeing the existing labels. After comparison, all assessments matched.
+Original second-review exports are unavailable. Item-level rows were transcribed from the author's complete-agreement summary, not independently preserved annotations.
+No inter-rater reliability was measured from two original annotation sets. Metrics describe agreement with a selected AI-origin reference, not validated human accuracy.
+Methods and results: reports/reviewer_validation/summary.json.
+
+## Run
+
+Python 3.11+. Saved-data analysis requires no API key.
+
+```sh
+python -m pip install -r requirements-research-lock.txt
+python -m pip install --no-deps --no-build-isolation -e .
+python scripts/analyze_reported_review.py --figures
+python -m pytest
+```
+
+run_experiment.py and run_main_experiment.py make paid API requests.
+
+## Files
+
+- `.gitattributes` - Preservation of original file bytes in Git.
+- `.gitignore` - Git exclusions.
+- `RELEASE.md` - Installation, reproduction and packaging.
+- `configs/baseline.toml` - Experiment settings.
+- `configs/local.example.toml` - Experiment settings.
+- `configs/main.toml` - Experiment settings.
+- `configs/robustness.toml` - Experiment settings.
+- `data/ai_review/ai_reviewed_responses.csv` - Research data.
+- `data/ai_review/coordinator_qc_input.jsonl` - Research data.
+- `data/ai_review/coordinator_qc_review.jsonl` - Research data.
+- `data/ai_review/input_1.jsonl` - Research data.
+- `data/ai_review/input_2.jsonl` - Research data.
+- `data/ai_review/input_3.jsonl` - Research data.
+- `data/ai_review/protocol.md` - Research data.
+- `data/ai_review/review_1.jsonl` - Research data.
+- `data/ai_review/review_2.jsonl` - Research data.
+- `data/ai_review/review_3.jsonl` - Research data.
+- `data/ai_review/source_manifest.json` - Research data.
+- `data/author_review/confirmation.json` - Assessment approval procedure.
+- `data/author_review/confirmed_labels.jsonl` - Existing AI judgments approved by the author.
+- `data/processed/prompts.csv` - Research data.
+- `data/processed/prompts_baseline.csv` - Research data.
+- `data/processed/prompts_main.csv` - Research data.
+- `data/raw/claims_baseline.csv` - 50 pilot claims.
+- `data/raw/claims_demo.csv` - Research data.
+- `data/raw/claims_main.csv` - 150 main-experiment claims.
+- `data/raw/claims_main_metadata.csv` - Research data.
+- `data/runs/baseline/.run.lock` - Research data.
+- `data/runs/baseline/annotation.csv` - Research data.
+- `data/runs/baseline/annotation.manifest.json` - Research data.
+- `data/runs/baseline/attempts.jsonl` - Research data.
+- `data/runs/baseline/cost_review.json` - Research data.
+- `data/runs/baseline/evaluated_responses.csv` - Responses with primary automatic labels.
+- `data/runs/baseline/manifest.json` - Research data.
+- `data/runs/baseline/responses.jsonl` - Original model responses.
+- `data/runs/baseline/run_summary.json` - Research data.
+- `data/runs/budget.json` - Research data.
+- `data/runs/main/annotation.csv` - Research data.
+- `data/runs/main/annotation.manifest.json` - Research data.
+- `data/runs/main/collection_manifest.json` - Research data.
+- `data/runs/main/collection_summary.json` - Research data.
+- `data/runs/main/cost_review.json` - Research data.
+- `data/runs/main/evaluated_responses.csv` - Responses with primary automatic labels.
+- `data/runs/main/gpt-6-astra/.run.lock` - Research data.
+- `data/runs/main/gpt-6-astra/attempts.jsonl` - Research data.
+- `data/runs/main/gpt-6-astra/manifest.json` - Research data.
+- `data/runs/main/gpt-6-astra/responses.jsonl` - Original model responses.
+- `data/runs/main/gpt-6-astra/run_summary.json` - Research data.
+- `data/runs/main/gpt-6-luna/.run.lock` - Research data.
+- `data/runs/main/gpt-6-luna/attempts.jsonl` - Research data.
+- `data/runs/main/gpt-6-luna/manifest.json` - Research data.
+- `data/runs/main/gpt-6-luna/responses.jsonl` - Original model responses.
+- `data/runs/main/gpt-6-luna/run_summary.json` - Research data.
+- `data/runs/main/gpt-6.1-sol/.run.lock` - Research data.
+- `data/runs/main/gpt-6.1-sol/attempts.jsonl` - Research data.
+- `data/runs/main/gpt-6.1-sol/manifest.json` - Research data.
+- `data/runs/main/gpt-6.1-sol/responses.jsonl` - Original model responses.
+- `data/runs/main/gpt-6.1-sol/run_summary.json` - Research data.
+- `data/runs/main/run_summary.json` - Research data.
+- `data/runs/robustness/.run.lock` - Research data.
+- `data/runs/robustness/annotation_non_correct.csv` - Research data.
+- `data/runs/robustness/annotation_non_correct.manifest.json` - Research data.
+- `data/runs/robustness/attempts.jsonl` - Research data.
+- `data/runs/robustness/evaluated_responses.csv` - Responses with primary automatic labels.
+- `data/runs/robustness/manifest.json` - Research data.
+- `data/runs/robustness/responses.jsonl` - Original model responses.
+- `data/runs/robustness/run_summary.json` - Research data.
+- `data/second_review/reported_labels.jsonl` - AI-origin reference transcribed from author-reported second-review agreement.
+- `data/second_review/statement.json` - Author-reported second-review procedure and outcome.
+- `data/validation/baseline_dry_run.json` - Research data.
+- `data/validation/baseline_report.json` - Research data.
+- `data/validation/dataset_report.json` - Research data.
+- `data/validation/main_data_audit.json` - Research data.
+- `data/validation/main_dry_run.json` - Research data.
+- `data/validation/main_report.json` - Research data.
+- `data/validation_v2/candidate_holdout.json` - Research data.
+- `data/validation_v2/coordinator_manifest.json` - Research data.
+- `data/validation_v2/development.json` - Research data.
+- `data/validation_v2/evaluator_lock.json` - Research data.
+- `data/validation_v2/language_revision.json` - Research data.
+- `data/verification/baseline_sources.jsonl` - Research data.
+- `data/verification/main_answer_aliases.json` - Research data.
+- `data/verification/main_design.json` - Research data.
+- `data/verification/main_sources.jsonl` - Research data.
+- `pyproject.toml` - Project configuration and dependencies.
+- `reports/ai_review_results.md` - Research results.
+- `reports/ai_review_summary.json` - Research results.
+- `reports/baseline_analysis.json` - Research results.
+- `reports/baseline_collection.json` - Research results.
+- `reports/baseline_results.md` - Research results.
+- `reports/baseline_sensitivity_review_excluded.json` - Research results.
+- `reports/evaluator_diagnostics.json` - Research results.
+- `reports/evaluator_diagnostics.md` - Research results.
+- `reports/evaluator_v2/baseline_evaluated_v2.csv` - Research results.
+- `reports/evaluator_v2/comparison.json` - Research results.
+- `reports/evaluator_v2/comparison.md` - Research results.
+- `reports/evaluator_v2/human_validation.json` - Research results.
+- `reports/evaluator_v2/main_evaluated_v2.csv` - Research results.
+- `reports/evaluator_v2/robustness_evaluated_v2.csv` - Research results.
+- `reports/evaluator_v2/verification.json` - Research results.
+- `reports/experimental_design.md` - Research results.
+- `reports/figures/01_sycophancy_by_confidence.pdf` - Results figure.
+- `reports/figures/01_sycophancy_by_confidence.png` - Results figure.
+- `reports/figures/02_correction_by_confidence.pdf` - Results figure.
+- `reports/figures/02_correction_by_confidence.png` - Results figure.
+- `reports/figures/03_high_low_effect.pdf` - Results figure.
+- `reports/figures/03_high_low_effect.png` - Results figure.
+- `reports/figures/04_domain_by_confidence.pdf` - Results figure.
+- `reports/figures/04_domain_by_confidence.png` - Results figure.
+- `reports/figures/05_model_confidence_heatmap.pdf` - Results figure.
+- `reports/figures/05_model_confidence_heatmap.png` - Results figure.
+- `reports/figures/06_odds_ratio_forest.pdf` - Results figure.
+- `reports/figures/06_odds_ratio_forest.png` - Results figure.
+- `reports/figures/07_human_confusion_matrix.pdf` - Results figure.
+- `reports/figures/07_human_confusion_matrix.png` - Results figure.
+- `reports/final_audit.json` - Research results.
+- `reports/final_reproduction_verification.json` - Research results.
+- `reports/final_technical_verification.json` - Research results.
+- `reports/human_validation.json` - Research results.
+- `reports/implementation_status.md` - Research results.
+- `reports/main_analysis.json` - Research results.
+- `reports/main_collection.json` - Research results.
+- `reports/main_gee.json` - Research results.
+- `reports/main_human_validation.json` - Research results.
+- `reports/main_protocol.md` - Research results.
+- `reports/main_qualitative_examples.json` - Research results.
+- `reports/main_results.md` - Research results.
+- `reports/main_sensitivity_review_excluded.json` - Research results.
+- `reports/reproducibility_verification.json` - Research results.
+- `reports/review_evidence_corrections.md` - Research results.
+- `reports/review_v2/README.txt` - Research results.
+- `reports/review_v2/index.html` - Review packet selection.
+- `reports/review_v2/review_a.html` - Review form for 241 responses.
+- `reports/review_v2/review_b.html` - Review form for 198 responses.
+- `reports/reviewer_validation/07_human_confusion_matrix.pdf` - Results figure.
+- `reports/reviewer_validation/07_human_confusion_matrix.png` - Results figure.
+- `reports/reviewer_validation/confusion_matrices.csv` - Research results.
+- `reports/reviewer_validation/joined_labels.csv` - Research results.
+- `reports/reviewer_validation/summary.json` - Summary results.
+- `reports/reviewer_validation/summary.md` - Research results.
+- `reports/robustness_analysis.json` - Research results.
+- `reports/robustness_diagnostics.md` - Research results.
+- `reports/second_review_statement.json` - Research results.
+- `reports/self_review.md` - Research results.
+- `reports/supplemental_analysis.json` - Research results.
+- `reports/supplemental_analysis.md` - Research results.
+- `reports/tables/baseline_bootstrap_contrasts.csv` - Research results.
+- `reports/tables/baseline_bootstrap_rates.csv` - Research results.
+- `reports/tables/baseline_cochran_q.csv` - Research results.
+- `reports/tables/baseline_error_analysis.csv` - Research results.
+- `reports/tables/baseline_mcnemar.csv` - Research results.
+- `reports/tables/baseline_rates_by_confidence.csv` - Research results.
+- `reports/tables/baseline_rates_by_difficulty.csv` - Research results.
+- `reports/tables/baseline_rates_by_domain.csv` - Research results.
+- `reports/tables/error_analysis.csv` - Research results.
+- `reports/tables/main_bootstrap_contrasts.csv` - Research results.
+- `reports/tables/main_bootstrap_rates.csv` - Research results.
+- `reports/tables/main_cochran_q.csv` - Research results.
+- `reports/tables/main_difficulty_effects.csv` - Research results.
+- `reports/tables/main_domain_effects.csv` - Research results.
+- `reports/tables/main_gee_coefficients.csv` - Research results.
+- `reports/tables/main_mcnemar.csv` - Research results.
+- `reports/tables/main_rates_by_confidence.csv` - Research results.
+- `reports/tables/main_rates_by_difficulty.csv` - Research results.
+- `reports/tables/main_rates_by_domain.csv` - Research results.
+- `reports/tables/model_usage.csv` - Research results.
+- `reports/tables/robustness_repetition_effects.csv` - Research results.
+- `reports/tables/supplemental_assignment_bounds.csv` - Research results.
+- `reports/tables/supplemental_high_low_bounds.csv` - Research results.
+- `reports/tables/supplemental_zero_event_bounds.csv` - Research results.
+- `reports/topic_approval.json` - Research results.
+- `reports/user_review_statement.json` - Research results.
+- `reports/validation_v2_workflow.md` - Research results.
+- `reports/verification_baseline.md` - Research results.
+- `reports/verification_main.md` - Research results.
+- `requirements-research-lock.txt` - Pinned dependency versions.
+- `scripts/analyze_experiment.py` - Command-line script.
+- `scripts/analyze_main_experiment.py` - Command-line script.
+- `scripts/analyze_reported_review.py` - Recompute recorded-review metrics.
+- `scripts/audit_release_language.py` - Check packaged text for remaining Cyrillic.
+- `scripts/build_review_forms.py` - Build English offline review forms.
+- `scripts/package_release.py` - Build and verify release archives.
+- `scripts/prepare_dataset.py` - Command-line script.
+- `scripts/run_experiment.py` - Command-line script.
+- `scripts/run_main_experiment.py` - Command-line script.
+- `scripts/serve_review.py` - Command-line script.
+- `scripts/summarize_ai_review.py` - Command-line script.
+- `scripts/supplemental_analysis.py` - Command-line script.
+- `scripts/validate_evaluator.py` - Command-line script.
+- `src/sycophancy/__init__.py` - Program module.
+- `src/sycophancy/analysis.py` - Program module.
+- `src/sycophancy/annotation.py` - Program module.
+- `src/sycophancy/budget.py` - Program module.
+- `src/sycophancy/cli.py` - Program module.
+- `src/sycophancy/constants.py` - Program module.
+- `src/sycophancy/cost_receipts.py` - Program module.
+- `src/sycophancy/data.py` - Program module.
+- `src/sycophancy/diagnostics.py` - Program module.
+- `src/sycophancy/evaluation.py` - Program module.
+- `src/sycophancy/evaluation_v2.py` - Program module.
+- `src/sycophancy/experiment_config.py` - Program module.
+- `src/sycophancy/gee.py` - Program module.
+- `src/sycophancy/human_review.py` - Program module.
+- `src/sycophancy/llm.py` - Program module.
+- `src/sycophancy/main_reporting.py` - Program module.
+- `src/sycophancy/multi_model.py` - Program module.
+- `src/sycophancy/paths.py` - Program module.
+- `src/sycophancy/plots.py` - Program module.
+- `src/sycophancy/prompts.py` - Program module.
+- `src/sycophancy/reported_review_validation.py` - Validate review provenance and calculate metrics.
+- `src/sycophancy/reporting.py` - Program module.
+- `src/sycophancy/review_ui.html` - Program module.
+- `src/sycophancy/runner.py` - Program module.
+- `src/sycophancy/schemas.py` - Program module.
+- `src/sycophancy/validation.py` - Program module.
+- `src/sycophancy/validation_study.py` - Program module.
+- `tests/conftest.py` - Program tests.
+- `tests/test_ai_review_summary.py` - Program tests.
+- `tests/test_analysis.py` - Program tests.
+- `tests/test_annotation.py` - Program tests.
+- `tests/test_baseline_sources.py` - Program tests.
+- `tests/test_budget.py` - Program tests.
+- `tests/test_cli.py` - Program tests.
+- `tests/test_cost_receipts.py` - Program tests.
+- `tests/test_data.py` - Program tests.
+- `tests/test_diagnostics.py` - Program tests.
+- `tests/test_evaluation.py` - Program tests.
+- `tests/test_evaluation_v2.py` - Program tests.
+- `tests/test_gee.py` - Program tests.
+- `tests/test_human_review.py` - Program tests.
+- `tests/test_llm.py` - Program tests.
+- `tests/test_main_reporting.py` - Program tests.
+- `tests/test_main_sources.py` - Program tests.
+- `tests/test_model_config.py` - Program tests.
+- `tests/test_multi_model.py` - Program tests.
+- `tests/test_paths.py` - Program tests.
+- `tests/test_plots.py` - Program tests.
+- `tests/test_prompts.py` - Program tests.
+- `tests/test_release.py` - Program tests.
+- `tests/test_reported_review_validation.py` - Program tests.
+- `tests/test_reporting.py` - Program tests.
+- `tests/test_review_translation.py` - Program tests.
+- `tests/test_runner.py` - Program tests.
+- `tests/test_supplemental_analysis.py` - Program tests.
+- `tests/test_validation.py` - Program tests.
+- `tests/test_validation_study.py` - Program tests.
+- `README.md` - File index and setup.
+- `RELEASE_MANIFEST.json` - Per-file checksums.
